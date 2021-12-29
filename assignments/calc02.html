@@ -1,0 +1,172 @@
+
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+
+    <style>
+        fieldset {
+            width: 60%;
+            margin: 20px;
+        }
+    </style>
+
+   
+
+</head>
+
+<body>
+    <fieldset>
+        <legend>Toolbar</legend>
+        <div>
+            Number
+            <input type='text' id='number' />
+            <input type='button' onClick="calculator.addToList()" value='Add To List'   />
+            
+            <input type='button' value='Clear Display' 
+                    onclick="display.ClearDisplay()" />
+            
+            <input type='button' onclick="display.ResetCalc()" value='Reset Calculator'  />
+
+            <br/>
+            <input type='button'  onClick="calculator.sumFunc()" value='Sum'    />
+            <input type='button' onClick="calculator.AvgFunc()" value='Average'  " />
+            <input type='button' onClick="calculator.MinFunc()" value='Find Min'   />
+
+        </div>
+
+    </fieldset>
+
+    <hr/>
+
+    <fieldset>
+        <legend>Console</legend>
+
+        <div id='console'>
+            <!-- <p>sum is 60</p>
+            <p>average is 20</p> -->
+        </div>
+
+    </fieldset>
+
+    <fieldset>
+        <legend>Number List</legend>
+
+        <ul id='numberList'>
+            <!-- <li>29</li>
+            <li>11</li>
+            <li>10</li> -->
+        </ul>
+
+        <input type='button' value='refresh list' />
+    </fieldset>
+
+    <script>
+
+        // Display object is displaying data
+        let display = new Object();
+        
+        // Displaying the list
+        display.displayList = function displayList(val) {
+            if(!isNaN(val)){
+                calculator.arr.push(val);
+                let x = document.getElementById("numberList");
+                x.innerHTML += `<li>${calculator.arr[calculator.arr.length - 1]}</li>`;
+            }
+            else {
+                let x = document.getElementById("console");
+                x.innerHTML = "Invalid Input "+ val;
+            }
+            
+        }
+
+        // Printing sum
+        display.printSum = function printSum() {
+            let x = document.getElementById("console");
+            x.innerHTML += "sum: "+ calculator.sum + "<br />";
+        }
+
+
+        // Printing Average
+        display.printAvg = function printAvg() {
+            let x = document.getElementById("console");
+            x.innerHTML += "Average: "+ calculator.avg + "<br />";
+        }
+
+        // Printing Min
+        display.printMin = function printMin() {
+            let x = document.getElementById("console");
+            x.innerHTML += "Min: "+ calculator.min + "<br />";
+        }
+
+        display.ClearDisplay = function ClearDisplay() {
+            let x = document.getElementById("console");
+            x.innerHTML = "";
+
+            let y = document.getElementById("numberList");
+            y.innerHTML = "";
+
+            let z = document.getElementById("number");
+            z.value = '';
+        }
+
+        display.ResetCalc = function ResetCalc() {
+            calculator.arr = [];
+            calculator.sum = 0.0;
+            calculator.avg = 0;
+            calculator.min = 10000000;
+            display.ClearDisplay();
+        }
+
+        // Calculator object to calculate the values
+        let calculator = new Object();
+        calculator.arr = [];
+        calculator.sum = 0;
+        calculator.avg = 0;
+        calculator.min = NaN;
+
+        calculator.addToList = function addToList() {
+            let x = document.getElementById("number");
+            let val = parseFloat(x.value);
+            display.displayList(val);
+        }
+
+        // To calculate sum
+        calculator.calcSum = function calcSum() {
+            let temp_sum = 0;
+            for(let i = 0; i < this.arr.length; i++)
+            temp_sum += this.arr[i];
+            return temp_sum;
+            
+        }
+
+        calculator.sumFunc = function sumFunc() {
+            this.sum = this.calcSum();
+            display.printSum();
+        }
+
+        calculator.AvgFunc = function AvgFunc() {
+            this.avg = this.sum / this.arr.length;
+            display.printAvg();
+        }
+
+        calculator.MinFunc = function MinFunc() {
+            this.min = this.arr[0];
+            for(let i = 1; i < this.arr.length; i++){
+                if(this.min > this.arr[i]) this.min = this.arr[i];
+            }
+            
+            display.printMin();
+        }
+
+    </script>
+    
+</body>
+
+</html>
+

@@ -7,13 +7,8 @@ function Book(title, author, price, rating){
 
 let bookCollection = [];
 
-bookCollection[bookCollection.length] = new Book('cosmos', 'james', 200, 4.3);
-bookCollection[bookCollection.length] = new Book('Science', 'richhie', 250, 4.3);
-bookCollection[bookCollection.length] = new Book('Maths', 'Risabh', 300, 4.7);
-bookCollection[bookCollection.length] = new Book('Geography', 'Clive', 100, 4.5);
-bookCollection[bookCollection.length] = new Book('computer', 'jonny', 300, 4.9);
-
 let bookManager = {
+
     addBook: (book) => {
         bookCollection[bookCollection.length] = book;
     },
@@ -52,6 +47,12 @@ let bookManager = {
         return booksWithRatingabove;
     }
 }
+
+bookManager.addBook(new Book('cosmos', 'james', 200, 4.3));
+bookManager.addBook(new Book('Science', 'richhie', 250, 4.3));
+bookManager.addBook(new Book('Maths', 'Risabh', 300, 4.7));
+bookManager.addBook(new Book('Geography', 'Clive', 100, 4.5));
+bookManager.addBook(new Book('computer', 'jonny', 300, 4.9));
 
 console.log(bookCollection);
 console.log(bookManager.getBooksInPriceRange(100, 250));

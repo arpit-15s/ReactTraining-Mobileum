@@ -1,0 +1,116 @@
+
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+
+    <style>
+        fieldset {
+            width: 60%;
+            margin: 20px;
+        }
+    </style>
+
+   
+
+</head>
+
+<body>
+    <fieldset>
+        <legend>Toolbar</legend>
+        <div>
+            Number
+            <input type='text' id='number' />
+            <input type='button' onClick="add()" value='Add To List'   />
+            
+            <input type='button' value='Clear Display' 
+                    onclick="ClearDisplay()" />
+            
+            <input type='button' onclick="ResetCalc()" value='Reset Calculator'  />
+
+            <br/>
+            <input type='button'  onClick="sumFunc()" value='Sum'    />
+            <input type='button' onClick="AvgFunc()" value='Average'  " />
+            <input type='button' onClick="MinFunc()" value='Find Min'   />
+
+        </div>
+
+    </fieldset>
+
+    <hr/>
+
+    <fieldset>
+        <legend>Console</legend>
+
+        <div id='console'>
+            <!-- <p>sum is 60</p>
+            <p>average is 20</p> -->
+        </div>
+
+    </fieldset>
+
+    <fieldset>
+        <legend>Number List</legend>
+
+        <ul id='numberList'>
+            <!-- <li>29</li>
+            <li>11</li>
+            <li>10</li> -->
+        </ul>
+
+        <input type='button' value='refresh list' />
+    </fieldset>
+
+    <script>
+        let arr = [], sum = 0.0, avg = 0, min = 10000000;
+        function add() {
+            arr.push(document.getElementById("number").value);
+            sum += parseFloat(arr[arr.length - 1]);
+            avg = sum / arr.length;
+            min = Math.min(min, arr[arr.length - 1]);
+            let x = document.getElementById("numberList");
+            x.innerHTML += `<li>${arr[arr.length - 1]}</li>`;
+        }
+
+        function sumFunc() {
+            let x = document.getElementById("console");
+            x.innerHTML = "sum: "+ sum;
+        }
+
+        function AvgFunc() {
+            let x = document.getElementById("console");
+            x.innerHTML = "Average: "+ avg;
+        }
+
+        function MinFunc() {
+            let x = document.getElementById("console");
+            x.innerHTML = "Min: "+ min;
+        }
+
+        function ClearDisplay() {
+            let x = document.getElementById("console");
+            x.innerHTML = "";
+
+            let y = document.getElementById("numberList");
+            y.innerHTML = "";
+        }
+
+        function ResetCalc() {
+            arr = [];
+            sum = 0.0;
+            avg = 0;
+            min = 10000000;
+            ClearDisplay();
+        }
+        
+    </script>
+    
+</body>
+
+</html>
+

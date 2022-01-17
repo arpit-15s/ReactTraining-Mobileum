@@ -112,7 +112,7 @@ class Game extends React.Component {
                         <button
                         className="reset-button"
                         onClick={this.handleStart}
-                        >{this.state.button}</button>  
+                        >Start Game</button>  
                     </If>  
                 </div>
                 );
@@ -120,9 +120,5 @@ class Game extends React.Component {
     }
 
 }
-
-
-
-
 
 export default Game;
